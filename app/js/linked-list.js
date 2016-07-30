@@ -7,10 +7,11 @@ var LinkedList = function() {
 LinkedList.constructor = LinkedList;
 
 LinkedList.prototype.createNode = function(value) {
-  return {
-    value: value,
-    next: null
-  }
+  var obj = Object.create(null);
+  obj.value = value;
+  obj.next = null;
+
+  return obj;
 };
 
 LinkedList.prototype.addToTail = function(value) {
