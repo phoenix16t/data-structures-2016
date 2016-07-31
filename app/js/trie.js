@@ -33,30 +33,36 @@ Trie.prototype.insert = function(value) {
 };
 
 Trie.prototype.delete = function(value) {
-  var removed = this.findNode(value);
-  var lastChr = value.slice(-1);
+  var node = this.findNode(value);
 
-  if(!removed) {
-    return false;
+  if(node && node.isWord) {
+    node.isWord = false;
+    --this.size;
+
+    this.inspectChildren(node);
+
+    return value;
   }
   else {
-    if(Object.keys(removed.children).length === 0) {
-      delete removed.parent.children[lastChr];
-    }
-    
-    if(!removed.isWord) {
-      return false;
-    }
-    else {
-      removed.isWord = false;
-    }
+    return false;
+  }
+};
+
+Trie.prototype.inspectChildren = function(node) {
+  if(Object.keys(node.children).length === 0) {
+    this.removeNode(node);
+  }
+  else {
+    return;
   }
 
-  if(!removed.parent.isWord) {
-    this.delete(value.slice(0, -1));
+  if(node.parent && !node.parent.isWord) {
+    this.inspectChildren(node.parent);
   }
+};
 
-  return value;
+Trie.prototype.removeNode = function(node) {
+  delete node.parent.children[node.value];
 };
 
 Trie.prototype.find = function(value) {

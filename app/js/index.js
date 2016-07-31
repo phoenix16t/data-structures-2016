@@ -86,14 +86,18 @@ trie.insert('to');
 trie.insert('te');
 trie.insert('tea');
 trie.insert('ted');
-// trie.insert('ten');
+trie.insert('teddy');
+trie.insert('ten');
 
-// console.log("congtains", trie.contains('ten'));
-// console.log("find", trie.find('ten'));
-console.log("del", trie.delete('te'));
+console.log("congtains", trie.contains('ten'));
+console.log("find", trie.find('ten'));
+// console.log("del", trie.delete('te'));
 // console.log("del", trie.delete('ten'));
-console.log("del", trie.delete('ted'));
-console.log("del", trie.delete('tea'));
-console.log("del", trie.delete('teas'));
+// console.log("del", trie.delete('ted'));
+// debugger
+// console.log("del", trie.delete('tea'));
+// console.log("del", trie.delete('teas'));
+console.log("del", trie.delete('teddy'));
+console.log("del", trie.delete('to'));
 console.log("trie", trie)
 
