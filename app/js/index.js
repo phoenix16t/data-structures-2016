@@ -2,6 +2,7 @@ var LinkedList = require('./linked-list.js');
 var Queue = require('./queue.js');
 var Stack = require('./stack.js');
 var Tree = require('./tree.js');
+var Trie = require('./trie.js');
 
 // var linkedList = new LinkedList();
 // linkedList.addToTail(5);
@@ -9,7 +10,7 @@ var Tree = require('./tree.js');
 // linkedList.addToTail(7);
 // linkedList.addToTail(8);
 // linkedList.addToTail(9);
-// // linkedList.getTail();
+// linkedList.getTail();
 // console.log("removed", linkedList.removeFromTail());
 // linkedList.removeFromTail();
 // linkedList.removeFromHead();
@@ -39,19 +40,19 @@ var Tree = require('./tree.js');
 // console.log("pop", stack.pop());
 // console.log("pop", stack.pop());
 
-var tree = new Tree();
-tree.add(7);
-tree.add(5);
-tree.add(3);
-tree.add(12);
-tree.add(8);
+// var tree = new Tree();
+// tree.add(7);
+// tree.add(5);
+// tree.add(3);
+// tree.add(12);
+// tree.add(8);
 // tree.add(1);
-tree.add(6);
+// tree.add(6);
 // tree.add(2);
 // tree.add(14);
-tree.add(15);
-tree.add(16);
-tree.add(13);
+// tree.add(15);
+// tree.add(16);
+// tree.add(13);
 // tree.add(9);
 // tree.add(11);
 // tree.add(4);
@@ -65,10 +66,34 @@ tree.add(13);
 // console.log("delete", tree.delete(3));
 // console.log("delete", tree.delete(5));
 // console.log("delete", tree.delete(8));
-console.log("tree", tree)
-console.log("delete", tree.delete(8));
-console.log("delete", tree.delete(12));
-console.log("contains", tree.contains(26));
-console.log("tree", tree)
+// console.log("tree", tree)
+// console.log("delete", tree.delete(8));
+// console.log("delete", tree.delete(12));
+// console.log("contains", tree.contains(26));
+// console.log("tree", tree)
 
+var trie = new Trie();
+trie.insert('abc');
+trie.insert('abt');
+trie.insert('ab');
+trie.insert('b');
+
+trie.insert('i');
+trie.insert('in');
+trie.insert('inn');
+trie.insert('a');
+trie.insert('to');
+trie.insert('te');
+trie.insert('tea');
+trie.insert('ted');
+// trie.insert('ten');
+
+// console.log("congtains", trie.contains('ten'));
+// console.log("find", trie.find('ten'));
+console.log("del", trie.delete('te'));
+// console.log("del", trie.delete('ten'));
+console.log("del", trie.delete('ted'));
+console.log("del", trie.delete('tea'));
+console.log("del", trie.delete('teas'));
+console.log("trie", trie)
 
