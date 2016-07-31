@@ -89,8 +89,7 @@ trie.insert('ted');
 trie.insert('teddy');
 trie.insert('ten');
 
-console.log("congtains", trie.contains('ten'));
-console.log("find", trie.find('ten'));
+console.log("congtains", trie.contains('tens'));
 // console.log("del", trie.delete('te'));
 // console.log("del", trie.delete('ten'));
 // console.log("del", trie.delete('ted'));

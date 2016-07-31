@@ -32,8 +32,30 @@ Trie.prototype.insert = function(value) {
   }
 };
 
+Trie.prototype.contains = function(value) {
+  var node = this.find(value);
+  return !!node.isWord;
+};
+
+Trie.prototype.find = function(value) {
+  var chn = this.root.children;
+
+  for(var i = 0; i < value.length; i++) {
+    if(chn[value[i]] && i === value.length - 1) {
+      return chn[value[i]];
+    }
+    if(!chn[value[i]]) {
+      return false;
+    }
+
+    chn = chn[value[i]].children;
+  }
+
+  return false;
+}
+
 Trie.prototype.delete = function(value) {
-  var node = this.findNode(value);
+  var node = this.find(value);
 
   if(node && node.isWord) {
     node.isWord = false;
@@ -65,30 +87,5 @@ Trie.prototype.removeNode = function(node) {
   delete node.parent.children[node.value];
 };
 
-Trie.prototype.find = function(value) {
-  var node = this.findNode(value);
-  return node.isWord ? value : false;
-};
-
-Trie.prototype.findNode = function(value) {
-  var chn = this.root.children;
-
-  for(var i = 0; i < value.length; i++) {
-    if(chn[value[i]] && i === value.length - 1) {
-      return chn[value[i]];
-    }
-    if(!chn[value[i]]) {
-      return false;
-    }
-
-    chn = chn[value[i]].children;
-  }
-
-  return false;
-}
-
-Trie.prototype.contains = function(value) {
-  return !!this.find(value);
-};
 
 module.exports = Trie;
