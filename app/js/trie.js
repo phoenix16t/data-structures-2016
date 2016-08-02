@@ -45,13 +45,13 @@ Trie.prototype.find = function(value) {
       return chn[value[i]];
     }
     if(!chn[value[i]]) {
-      return false;
+      return null;
     }
 
     chn = chn[value[i]].children;
   }
 
-  return false;
+  return null;
 }
 
 Trie.prototype.delete = function(value) {
@@ -66,7 +66,7 @@ Trie.prototype.delete = function(value) {
     return value;
   }
   else {
-    return false;
+    return null;
   }
 };
 
