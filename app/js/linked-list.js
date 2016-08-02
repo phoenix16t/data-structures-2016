@@ -30,14 +30,7 @@ LinkedList.prototype.addToTail = function(value) {
 };
 
 LinkedList.prototype.removeFromHead = function() {
-  if(this.length === 0) {
-    return null;
-  }
-
-  var removed = this.head.value;
-  this.head = this.head.next;
-  --this.length;
-  return removed;
+  return this.removeNode(this.head.value);
 };
 
 LinkedList.prototype.removeFromTail = function() {
@@ -45,35 +38,66 @@ LinkedList.prototype.removeFromTail = function() {
     return null;
   }
 
-  var node = null;
-  var nextNode = this.head;
-
-  while(nextNode.next) {
-    node = nextNode;
-    nextNode = nextNode.next;
-  }
-
-  var removed = nextNode.value;
-  node.next = null;
-  --this.length;
-  return removed;
-};
-
-LinkedList.prototype.length = function() {
-  return this.length;
-};
-
-LinkedList.prototype.contains = function(value) {
   var node = this.head;
-
-  while(node) {
-    if(node.value === value) {
-      return true;
-    }
+  while(node.next) {
     node = node.next;
   }
 
-  return false;
+  return this.removeNode(node.value);
 };
+
+LinkedList.prototype.removeNode = function(value) {
+  var obj = this.findRoot(value);
+  var removed = null;
+
+  if(!obj) {
+    return removed;
+  }
+
+  if(!obj.parent) {
+    removed = this.head;
+    this.head = this.head.next;
+  }
+  else {
+    removed = obj.parent.next;
+    obj.parent.next = obj.child.next || null;
+  }
+
+  --this.length;
+
+  return removed;
+};
+
+LinkedList.prototype.contains = function(value) {
+  return !!this.find(value);
+};
+
+LinkedList.prototype.find = function(value) {
+  var obj = this.findRoot(value);
+  return obj ? obj.child : null;
+};
+
+LinkedList.prototype.findRoot = function(value) {
+  if(this.length === 0) {
+    return null;
+  }
+
+  var parentNode = null;
+  var childNode = this.head;
+  var returnObj = Object.create(null);
+
+  while(childNode) {
+    if(childNode.value === value) {
+      returnObj.parent = parentNode;
+      returnObj.child = childNode;
+      return returnObj;
+    }
+
+    parentNode = childNode;
+    childNode = childNode.next;
+  }
+
+  return null;
+}
 
 module.exports = LinkedList;
