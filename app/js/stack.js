@@ -17,6 +17,6 @@ Stack.prototype.pop = function() {
 
 Stack.prototype.size = function() {
   return this.length;
-}
+};
 
 module.exports = Stack;

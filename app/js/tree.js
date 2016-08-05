@@ -46,18 +46,19 @@ Tree.prototype.delete = function(value) {
   }
 
   var removed = node.value;
+  var child;
 
   if(!node.parent && !node.left && !node.right) {
     this.root = null;
   }
   else if(node.left && node.right) {
-    var child = this.findMin(node.right);
+    child = this.findMin(node.right);
     this.delete(child.value);
     node.value = child.value;
   }
   else {
     var parent = node.parent;
-    var child = parent.value > value ? 'left' : 'right';
+    child = parent.value > value ? 'left' : 'right';
     var replacement = node.left || node.right;
     parent[child] = replacement;
     if(replacement) {

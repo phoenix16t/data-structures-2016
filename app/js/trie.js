@@ -52,7 +52,7 @@ Trie.prototype.find = function(value) {
   }
 
   return null;
-}
+};
 
 Trie.prototype.delete = function(value) {
   var node = this.find(value);
