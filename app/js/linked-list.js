@@ -9,6 +9,7 @@ LinkedList.constructor = LinkedList;
 LinkedList.prototype.createNode = function(value) {
   var obj = Object.create(null);
   obj.value = value;
+  obj.prev = null;
   obj.next = null;
 
   return obj;
@@ -22,6 +23,7 @@ LinkedList.prototype.addToTail = function(value) {
     this.tail = node;
   }
   else {
+    node.prev = this.tail;
     this.tail.next = node;
     this.tail = node;
   }
@@ -30,7 +32,15 @@ LinkedList.prototype.addToTail = function(value) {
 };
 
 LinkedList.prototype.removeFromHead = function() {
-  return this.removeNode(this.head.value);
+  if(this.length === 0) {
+    return null;
+  }
+
+  var node = this.head;
+  this.head = this.head.next;
+  this.head.prev = null;
+  --this.length;
+  return node;
 };
 
 LinkedList.prototype.removeFromTail = function() {
@@ -38,34 +48,34 @@ LinkedList.prototype.removeFromTail = function() {
     return null;
   }
 
-  var node = this.head;
-  while(node.next) {
-    node = node.next;
-  }
-
-  return this.removeNode(node.value);
+  var node = this.tail;
+  this.tail.prev.next = null;
+  this.tail = this.tail.prev;
+  --this.length;
+  return node;
 };
 
-LinkedList.prototype.removeNode = function(value) {
-  var obj = this.findRoot(value);
-  var removed = null;
+LinkedList.prototype.remove = function(value) {
+  var node = this.find(value);
 
-  if(!obj) {
-    return removed;
+  if(!node) {
+    return null;
   }
 
-  if(!obj.parent) {
-    removed = this.head;
-    this.head = this.head.next;
+  if(!node.prev) {
+    this.removeFromHead();
+  }
+  else if(!node.next) {
+    this.removeFromTail();
   }
   else {
-    removed = obj.parent.next;
-    obj.parent.next = obj.child.next || null;
+    node.next.prev = node.prev;
+    node.prev.next = node.next;
+    --this.length;
   }
 
-  --this.length;
 
-  return removed;
+  return node;
 };
 
 LinkedList.prototype.contains = function(value) {
@@ -73,31 +83,17 @@ LinkedList.prototype.contains = function(value) {
 };
 
 LinkedList.prototype.find = function(value) {
-  var obj = this.findRoot(value);
-  return obj ? obj.child : null;
-};
+  var node = this.head;
 
-LinkedList.prototype.findRoot = function(value) {
-  if(this.length === 0) {
-    return null;
-  }
-
-  var parentNode = null;
-  var childNode = this.head;
-  var returnObj = Object.create(null);
-
-  while(childNode) {
-    if(childNode.value === value) {
-      returnObj.parent = parentNode;
-      returnObj.child = childNode;
-      return returnObj;
+  while(node) {
+    if(node.value === value) {
+      return node;
     }
 
-    parentNode = childNode;
-    childNode = childNode.next;
+    node = node.next;
   }
 
   return null;
-}
+};
 
 module.exports = LinkedList;
