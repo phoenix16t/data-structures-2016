@@ -82,7 +82,7 @@ Tree.prototype.find = function(value, parent) {
 
   var child = value < parent.value ? 'left' : 'right';
 
-  return (parent[child] && this.find(value, parent[child])) || false;
+  return (parent[child] && this.find(value, parent[child])) || null;
 };
 
 Tree.prototype.findMin = function(node) {

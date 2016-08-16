@@ -12,7 +12,7 @@ Stack.prototype.push = function(value) {
 };
 
 Stack.prototype.pop = function() {
-  return this.removeFromTail();
+  return this.removeFromTail().value;
 };
 
 Stack.prototype.size = function() {

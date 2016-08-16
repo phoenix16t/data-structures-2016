@@ -12,7 +12,7 @@ Queue.prototype.enqueue = function(value) {
 };
 
 Queue.prototype.dequeue = function() {
-  return this.removeFromHead();
+  return this.removeFromHead().value;
 };
 
 Queue.prototype.size = function() {
