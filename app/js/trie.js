@@ -34,7 +34,7 @@ Trie.prototype.insert = function(value) {
 
 Trie.prototype.contains = function(value) {
   var node = this.find(value);
-  return !!node.isWord;
+  return (node && !!node.isWord) || null;
 };
 
 Trie.prototype.find = function(value) {
